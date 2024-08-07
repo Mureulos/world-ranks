@@ -1,10 +1,60 @@
 <main 
   class="
     container
-    m-4
-    w-full
     max-w-6xl
+    flex-col 
+    justify-center 
+    bg-dark-jungle-green
   "
 >
-  Home and Tailwind works
+  <app-filter></app-filter>
+  
+  <app-countries-table 
+    class="
+      w-full
+      overflow-x-auto
+      laptop:overflow-x-hidden
+    " 
+    [data]="countriesData"
+  ></app-countries-table>
+
+  <div 
+    class="
+      flex 
+      flex-1 
+      justify-between 
+      sm:hidden mt-4
+    "
+  >
+    <button
+      (click)="changePage(currentPage - 1)"
+      class="
+        next-previous-paginator
+      "
+    >
+      <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
+      Previous
+    </button>
+
+    <span 
+      class="
+        px-4 
+        py-2 
+        text-sm 
+        font-medium
+      "
+    >
+      Page {{ currentPage }} of {{ totalPages }}
+    </span>
+    
+    <button
+      (click)="changePage(currentPage + 1)"
+      class="
+        next-previous-paginator
+      "
+    >
+      Next
+      <!-- <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon"> -->
+    </button>
+  </div>
 </main>

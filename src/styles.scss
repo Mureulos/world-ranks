@@ -5,6 +5,41 @@
 @import './assets/scss/$_color-variables.scss';
 @import './assets/scss/$_typograph.scss';
 
+@layer components {
+    .container {
+      @apply 
+        flex 
+        flex-wrap 
+        items-center
+        justify-around
+        border-1
+        border-solid
+        border-baltic-sea
+        laptop:rounded-md
+        w-full
+        py-8 
+        mobile:px-6
+        onlytablet:px-10
+        laptop:px-12
+        gap-10
+    }
+
+    // .next-previous-paginator {
+    //     @apply
+    //       flex
+    //       flex-row
+    //       items-center
+    //       py-2
+    //       px-3
+    //       gap-2
+    //       w-max
+    //       hover:bg-baltic-sea
+    //       disable: {
+    //           hover: bg-none
+    //       }
+    // }
+}
+
 *,
 *:before,
 *:after {
@@ -17,7 +52,7 @@
 
 html,
 body {
-    background-color: $dark-jungle-green;
+    background-color: #1a1b1d;
 }
 
 html,
@@ -119,13 +154,4 @@ table {
 
 input {
     border-radius: 0;
-}
-
-.container {
-    border: 1px solid $pale-sky;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 2em 3em;
-    gap: 3em;
 }

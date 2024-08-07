@@ -1,0 +1,55 @@
+<div 
+  class="
+    w-full
+    min-w-850
+    overflow-x-auto
+    tablet:overflow-x-hidden
+  "
+>
+  <table 
+    class="
+      w-full
+      min-w-850
+      text-left
+      text-base
+    "
+  >
+    <thead
+      class="
+        border-b-1
+        border-solid
+        border-baltic-sea
+        text-pale-sky
+        text-xs
+      "    
+    >
+      <tr 
+        class="
+          text-slate-600
+          *:py-4
+          *:text-pale-sky
+        "
+      >
+          <th>Flag</th>
+          <th>Name</th>
+          <th>Population</th>
+          <th>Area (km²)</th>
+          <th>Region</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr 
+        *ngFor="let country of data" 
+        class="*:py-6"
+      >
+          <td>
+            <img src="https://flagsapi.com/{{ country.flag }}/flat/64.png">
+          </td>
+          <td>{{ country.name.common }}</td>
+          <td> {{ country.population.toLocaleString('en-US') }}</td>
+          <td>{{ country.area.toLocaleString('en-US') }}</td>
+          <td>{{ country.region }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

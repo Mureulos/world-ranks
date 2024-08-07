@@ -4,8 +4,10 @@ module.exports = {
   theme: {
     screens: {
       mobile: {'max': '500px'},
-      tablet: {'min': '500px', 'max': '850px'},
-      laptop: {'min': '850px', 'max': '1280px'},
+      onlytablet: {'min': '500px', 'max': '850px'},
+      tablet: {'min': '500px',},
+      onlylaptop: {'min': '850px', 'max': '1280px'},
+      laptop: {'min': '850px', },
       desktop: {'min': '1280px'} ,
     },
     colors: {
@@ -18,6 +20,10 @@ module.exports = {
     fontFamily: {
       sans: ["Be Vietnam Pro Regular", "sans-serif"],
       serif: ["Be Vietnam Pro Regular", "serif"],
+      "light": ["Be Vietnam Pro Light", "serif"],
+      "medium": ["Be Vietnam Pro Medium", "serif"],
+      "regular": ["Be Vietnam Pro Regular", "serif"],
+      "bold": ["Be Vietnam Pro Bold", "serif"],
     },
     extend: {
       borderRadius: {
@@ -25,6 +31,14 @@ module.exports = {
         "md": "20px",
         "lg": "100",
       },
+
+      borderWidth: {
+        "1": "1px"
+      },
+
+      minWidth: {
+        "850": "850px"
+      }
     },
   },
   plugins: [],
