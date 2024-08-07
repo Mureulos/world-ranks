@@ -29,7 +29,17 @@
     <button
       (click)="changePage(currentPage - 1)"
       class="
-        next-previous-paginator
+        flex
+        flex-row
+        items-center
+        py-2
+        px-3
+        gap-2
+        w-max
+        hover:bg-baltic-sea
+        disabled: {
+          hover:bg-dark-jungle-green
+        }
       "
     >
       <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
@@ -50,7 +60,17 @@
     <button
       (click)="changePage(currentPage + 1)"
       class="
-        next-previous-paginator
+        flex
+        flex-row
+        items-center
+        py-2
+        px-3
+        gap-2
+        w-max
+        hover:bg-baltic-sea
+        disabled: {
+          hover:bg-dark-jungle-green
+        }
       "
     >
       Next

@@ -12,6 +12,7 @@
       min-w-850
       text-left
       text-base
+      border-spacing-8
     "
   >
     <thead
@@ -40,10 +41,21 @@
     <tbody>
       <tr 
         *ngFor="let country of data" 
-        class="*:py-6"
+        class="
+          *:align-middle
+          *:py-3
+        "
       >
           <td>
-            <img src="https://flagsapi.com/{{ country.flag }}/flat/64.png">
+            <img 
+              class="
+                rounded
+                object-cover
+                w-20
+                h-12
+              "
+              src="https://flagcdn.com/w80/{{ country.cca2.toLowerCase() }}.png"
+              alt="Flag of {{ country.name.common }}">
           </td>
           <td>{{ country.name.common }}</td>
           <td> {{ country.population.toLocaleString('en-US') }}</td>
