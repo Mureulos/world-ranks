@@ -1,22 +1,38 @@
 <main 
   class="
     container
-    max-w-6xl
+    max-w-7xl
     flex-col 
     justify-center 
     bg-dark-jungle-green
   "
 >
-  <app-filter></app-filter>
-  
-  <app-countries-table 
+  <app-search-field 
     class="
       w-full
+    "
+  ></app-search-field>
+  
+  <section 
+    class="
+      laptop:flex
+      w-full
       overflow-x-auto
-      laptop:overflow-x-hidden
+      gap-8
     " 
-    [data]="countriesData"
-  ></app-countries-table>
+  >
+      <app-filter
+        class="max-w-72 w-full"
+      ></app-filter>
+
+      <app-countries-table 
+        class="
+          w-full
+          overflow-x-auto
+        " 
+        [data]="countriesData"
+      ></app-countries-table>
+  </section>
 
   <div 
     class="
@@ -26,55 +42,49 @@
       sm:hidden mt-4
     "
   >
-    <button
-      (click)="changePage(currentPage - 1)"
-      class="
-        flex
-        flex-row
-        items-center
-        py-2
-        px-3
-        gap-2
-        w-max
-        hover:bg-baltic-sea
-        disabled: {
-          hover:bg-dark-jungle-green
-        }
-      "
-    >
-      <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
-      Previous
-    </button>
+      <button
+        (click)="changePage(currentPage - 1)"
+        class="
+          flex
+          flex-row
+          items-center
+          py-2
+          px-3
+          gap-2
+          w-max
+          hover:bg-baltic-sea
+        "
+      >
+        <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
+        Previous
+      </button>
 
-    <span 
-      class="
-        px-4 
-        py-2 
-        text-sm 
-        font-medium
-      "
-    >
-      Page {{ currentPage }} of {{ totalPages }}
-    </span>
-    
-    <button
-      (click)="changePage(currentPage + 1)"
-      class="
-        flex
-        flex-row
-        items-center
-        py-2
-        px-3
-        gap-2
-        w-max
-        hover:bg-baltic-sea
-        disabled: {
-          hover:bg-dark-jungle-green
-        }
-      "
-    >
-      Next
-      <!-- <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon"> -->
-    </button>
+      <span 
+        class="
+          px-4 
+          py-2 
+          text-sm 
+          font-medium
+        "
+      >
+        Page {{ currentPage }} of {{ totalPages }}
+      </span>
+      
+      <button
+        (click)="changePage(currentPage + 1)"
+        class="
+          flex
+          flex-row
+          items-center
+          py-2
+          px-3
+          gap-2
+          w-max
+          hover:bg-baltic-sea
+        "
+      >
+        Next
+        <!-- <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon"> -->
+      </button>
   </div>
 </main>

@@ -4,11 +4,12 @@ import { CountryType } from '../../shared/interface/types';
 import { FilterComponent } from './components/filter/filter.component';
 import { CountriesTableComponent } from './components/countries-table/countries-table.component';
 import { CommonModule } from '@angular/common';
+import { SearchFieldComponent } from './components/search-field/search-field.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FilterComponent, CountriesTableComponent],
+  imports: [CommonModule, FilterComponent, CountriesTableComponent, SearchFieldComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

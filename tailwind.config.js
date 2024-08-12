@@ -14,6 +14,7 @@ module.exports = {
       'dark-jungle-green': "#1B1D1F",
       'baltic-sea': "#282B30",
       'dodger-blue': "#4E80EE",
+      'mid-grey': "#5b5f6b",
       'pale-sky': "#6C727F",
       'iron': "#D2D5DA",
     },
@@ -23,21 +24,29 @@ module.exports = {
       "light": ["Be Vietnam Pro Light", "serif"],
       "medium": ["Be Vietnam Pro Medium", "serif"],
       "regular": ["Be Vietnam Pro Regular", "serif"],
+      "semibold": ["Be Vietnam Pro SemiBold", "serif"],
       "bold": ["Be Vietnam Pro Bold", "serif"],
+      "extrabold": ["Be Vietnam Pro ExtraBold", "serif"],
+      "black": ["Be Vietnam Pro Black", "serif"],
     },
     extend: {
       borderRadius: {
         "sm": "10px",
+        "small": "15px",
         "md": "20px",
-        "lg": "100",
+        "lg": "100px",
       },
 
       borderWidth: {
-        "1": "1px"
+        "1": "1px",
+        "3": "3px"
       },
 
       minWidth: {
         "850": "850px"
+      },
+      width: {
+        "100": "420px"
       }
     },
   },
