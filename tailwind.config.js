@@ -12,6 +12,7 @@ module.exports = {
     },
     colors: {
       'dark-jungle-green': "#1B1D1F",
+      'dark-jungle-green-2': "#212224",
       'baltic-sea': "#282B30",
       'dodger-blue': "#4E80EE",
       'mid-grey': "#5b5f6b",
@@ -43,10 +44,13 @@ module.exports = {
       },
 
       minWidth: {
-        "850": "850px"
+        "800": "800px",
+        "850": "850px",
+        "1100": "1100px",
       },
       width: {
-        "100": "420px"
+        "100": "420px",
+        "54": "54px"
       }
     },
   },

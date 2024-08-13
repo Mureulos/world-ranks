@@ -2,14 +2,13 @@
   class="
     w-full
     min-w-850
-    overflow-x-auto
+    overflow-auto
     tablet:overflow-x-hidden
   "
 >
   <table 
     class="
       w-full
-      min-w-850
       text-left
       text-base
       border-spacing-8
@@ -45,23 +44,34 @@
         class="
           *:align-middle
           *:py-3
+          *:rounded-none
+          transition-all
+          hover:bg-dark-jungle-green-2
+          hover:cursor-pointer
         "
+        [routerLink]="['/country', country.name.common]" 
       >
-          <td>
+        <td>
+          <a 
+            [href]="country.maps.googleMaps" 
+            target="_blank"
+          >
             <img 
               class="
                 rounded
                 object-cover
-                w-20
-                h-12
+                w-54
+                h-10
               "
-              src="https://flagcdn.com/w80/{{ country.cca2.toLowerCase() }}.png"
-              alt="Flag of {{ country.name.common }}">
-          </td>
-          <td>{{ country.name.common }}</td>
-          <td> {{ country.population.toLocaleString('en-US') }}</td>
-          <td>{{ country.area.toLocaleString('en-US') }}</td>
-          <td>{{ country.region }}</td>
+              src="https://flagcdn.com/w2560/{{ country.cca2.toLowerCase() }}.png"
+              alt="Flag of {{ country.name.common }}"
+            >
+          </a>
+        </td>
+        <td>{{ country.name.common }}</td>
+        <td> {{ country.population.toLocaleString('en-US') }}</td>
+        <td>{{ country.area.toLocaleString('en-US') }}</td>
+        <td>{{ country.region }}</td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .countryInfos {
+      @apply 
+        border-1
+        border-solid
+        border-baltic-sea
+        flex
+        justify-between
+        rounded-none
+        w-full
+        py-6
+        px-8
+        mobile:px-6
+    }
+
+    .countryInfos h3 {
+      @apply 
+      text-pale-sky
+        font-semibold
+    }
+
+    .countryInfos p {
+      @apply 
+        text-iron
+        font-regular
+    }
+
+    .flagsContainer {
+      @apply
+        flex
+        flex-wrap
+        gap-4
+        justify-start
+    }
+    
+    .flagsContainer img {
+      @apply
+        rounded
+        object-cover
+        w-54
+        h-10
+    }
+  }

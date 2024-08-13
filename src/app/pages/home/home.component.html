@@ -7,31 +7,20 @@
     bg-dark-jungle-green
   "
 >
-  <app-search-field 
-    class="
-      w-full
-    "
-  ></app-search-field>
+  <app-search-field class="w-full"></app-search-field>
   
   <section 
     class="
       laptop:flex
       w-full
-      overflow-x-auto
       gap-8
     " 
   >
-      <app-filter
-        class="max-w-72 w-full"
-      ></app-filter>
+    <app-filter class="max-w-72 w-full"></app-filter>
 
-      <app-countries-table 
-        class="
-          w-full
-          overflow-x-auto
-        " 
-        [data]="countriesData"
-      ></app-countries-table>
+    <div class="overflow-auto">
+      <app-countries-table class="w-full" [data]="countriesData"></app-countries-table>
+    </div>
   </section>
 
   <div 
@@ -42,49 +31,31 @@
       sm:hidden mt-4
     "
   >
-      <button
-        (click)="changePage(currentPage - 1)"
-        class="
-          flex
-          flex-row
-          items-center
-          py-2
-          px-3
-          gap-2
-          w-max
-          hover:bg-baltic-sea
-        "
-      >
-        <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
-        Previous
-      </button>
+    <button
+      (click)="changePage(currentPage - 1)"
+      class="paginatorButtons"
+    >
+      <!-- <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon"> -->
+      Previous
+    </button>
 
-      <span 
-        class="
-          px-4 
-          py-2 
-          text-sm 
-          font-medium
-        "
-      >
-        Page {{ currentPage }} of {{ totalPages }}
-      </span>
-      
-      <button
-        (click)="changePage(currentPage + 1)"
-        class="
-          flex
-          flex-row
-          items-center
-          py-2
-          px-3
-          gap-2
-          w-max
-          hover:bg-baltic-sea
-        "
-      >
-        Next
-        <!-- <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon"> -->
-      </button>
+    <span 
+      class="
+        px-4 
+        py-2 
+        text-sm 
+        font-medium
+      "
+    >
+      Page {{ currentPage }} of {{ totalPages }}
+    </span>
+    
+    <button
+      (click)="changePage(currentPage + 1)"
+      class="paginatorButtons"
+    >
+      Next
+      <!-- <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon"> -->
+    </button>
   </div>
 </main>

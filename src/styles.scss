@@ -1,42 +1,42 @@
+@import './assets/scss/$_color-variables.scss';
+@import './assets/scss/$_typograph.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './assets/scss/$_color-variables.scss';
-@import './assets/scss/$_typograph.scss';
-
 @layer components {
-    .container {
-      @apply 
-        flex 
-        flex-wrap 
-        items-center
-        justify-around
-        border-1
-        border-solid
-        border-baltic-sea
-        laptop:rounded-md
-        w-full
-        py-6 
-        px-8
-        mobile:px-6
-        gap-10
-    }
+  .container {
+    @apply 
+      flex 
+      flex-wrap 
+      items-center
+      justify-around
+      border-1
+      border-solid
+      border-baltic-sea
+      laptop:rounded-md
+      w-full
+      py-6 
+      px-8
+      mobile:px-6
+      gap-10
+  }
+}
 
-    // .next-previous-paginator {
-    //     @apply
-    //       flex
-    //       flex-row
-    //       items-center
-    //       py-2
-    //       px-3
-    //       gap-2
-    //       w-max
-    //       hover:bg-baltic-sea
-    //       disable: {
-    //           hover: bg-none
-    //       }
-    // }
+app-home, app-country-page {
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    z-index: 20;
+    top: 0;
+}
+
+@media (min-width: 500px) {
+    app-home, app-country-page {
+        position: relative;
+        top: 13em;
+    }
 }
 
 *,
