@@ -50,6 +50,7 @@
           hover:cursor-pointer
         "
         [routerLink]="['/country', country.name.common]" 
+        (click)="navigateToCountry(country)"
       >
         <td>
           <a 

@@ -1,77 +1,121 @@
-<main
-  class="
-    container
-    p-0
-    max-w-3xl
-    flex-col 
-    justify-center 
-    bg-dark-jungle-green
-    border-1
-    border-solid
-    border-baltic-sea
-  "
->
-  <section class="
-    flex
-    flex-col
-    items-center
-    py-6
-    px-8
-  ">
-    <img 
-      src="assets/img/china.webp" 
-      alt=""
-      class="relative w-64 h-48 bottom-16" 
-    >
+@if(this.countryData != null) {
+  <main
+    class="
+      container
+      p-0
+      gap-0
+      max-w-3xl
+      flex-col 
+      justify-center 
+      bg-dark-jungle-green
+      border-1
+      border-solid
+      border-baltic-sea
+    "
+  >
+    <section class="
+      flex
+      flex-col
+      items-center
+      py-6
+      px-8
+    ">
+      <a 
+        [href]="countryData.maps.googleMaps" 
+        target="_blank"
+      >
+        <img 
+          class="
+            rounded
+            object-cover
+            relative 
+            h-48 
+            bottom-16
+            cursor-pointer
+          "
+          src="https://flagcdn.com/w2560/{{ this.countryData.cca2.toLowerCase() }}.png"
+          alt="Flag of {{ this.countryData.name.common }}"
+        >
+      </a>
+      
+      <div class="flex flex-col gap-4 items-center">
+        <h1 class="text-4xl font-bold">{{ this.countryData.name.common }}</h1>
+        <h2>{{ this.countryData.name.official }}</h2>
+      </div>
 
-    <div class="flex flex-col gap-4 items-center">
-      <h1 class="text-4xl font-bold">China</h1>
-      <h2>People's Republic of China</h2>
-    </div>
+      <div 
+        class="
+          mt-8
+          flex
+          flex-wrap
+          justify-between
+          gap-8
+        "
+      >
+        <span
+          class="
+            flex
+            gap-4
+            p-4
+            bg-baltic-sea
+            text-sm
+          "
+        >
+          Population
+          <div class="h-full w-1 bg-dark-jungle-green"></div>
+          <p>{{ this.countryData.population.toLocaleString('en') }}</p>
+        </span>
 
-    <div 
-      class="
-        mt-8
-        flex
-        gap-4
-      "
-    >
-      <span>Population<p></p></span>
-      <span>Area(Km2)<p></p></span>
-    </div>
-  </section>
-  
-  <section class="flex flex-col w-full">
-    <div class="countryInfos">
-      <h3>Capital</h3>
-      <p>Chinese yuan</p>
-    </div>
+        <span
+          class="
+            flex
+            gap-4
+            p-4
+            bg-baltic-sea
+            text-sm
+          "
+        >
+          Area (Km2)
+          <div class="h-full w-1 bg-dark-jungle-green"></div>
+          <p>{{ this.countryData.area.toLocaleString('en')}}</p>
+        </span>
+      </div>
+    </section>
+    
+    <section class="flex flex-col w-full mt-10">
+      <div class="countryInfos">
+        <h3>Capital</h3>
+        <p>{{ this.countryData.capital }}</p>
+      </div>
 
-    <div class="countryInfos">
-      <h3>Subregion</h3>
-      <p>Chinese yuan</p>
-    </div>
+      <div class="countryInfos">
+        <h3>Subregion</h3>
+        <p>{{ this.countryData.subregion }}</p>
+      </div>
 
-    <div class="countryInfos">
-      <h3>Language</h3>
-      <p>Chinese yuan</p>
-    </div>
+      <div class="countryInfos">
+        <h3>Language</h3>
+        <p>{{ this.countryData.languages }}</p>
+      </div>
 
-    <div class="countryInfos">
-      <h3>Curriences</h3>
-      <p>Chinese yuan</p>
-    </div>
+      <div class="countryInfos">
+        <h3>Curriences</h3>
+        <p>{{ this.countryData.currencies }}</p>
+      </div>
 
-    <div class="countryInfos">
-      <h3>Continents</h3>
-      <p>Chinese yuan</p>
-    </div>
-  </section>
-  
-  <section class="countryInfos flex flex-col" >
-    <h3>Neighbouring Countries</h3>
-    <div class="flagsContainer">
+      <div class="countryInfos">
+        <h3>Continents</h3>
+        <p>{{ this.countryData.continents}}</p>
+      </div>
+    </section>
+    
+    <section class="countryInfos flex flex-col" >
+      <h3>Neighbouring Countries</h3>
 
-    </div>
-  </section>
-</main>
+      <div class="flagsContainer">
+
+      </div>
+    </section>
+  </main>
+}
+
