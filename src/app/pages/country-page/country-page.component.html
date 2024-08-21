@@ -2,15 +2,13 @@
   <main
     class="
       container
+      border
       p-0
       gap-0
       max-w-3xl
       flex-col 
       justify-center 
       bg-dark-jungle-green
-      border-1
-      border-solid
-      border-baltic-sea
     "
   >
     <section class="
@@ -132,46 +130,53 @@
       <h3>Neighbouring Countries</h3>
 
       <div class="flagsContainer">
-        <div
-          *ngFor="let borderCountryArray of this.borderCountries"
-          class="
-            cursor-pointer
-            flex
-            justify-center
-            items-center
-          "
-          (click)="navigateToCountry(borderCountryArray[0])"
-        >
-          <a
-            *ngFor="let borderCountry of borderCountryArray"
+        @if(this.countryData.borders) {
+          <div
+            *ngFor="let borderCountryArray of this.borderCountries"
             class="
               cursor-pointer
               flex
-              flex-col
+              justify-center
               items-center
-              gap-1
+            "
+            (click)="navigateToCountry(borderCountryArray[0])"
+          >
+            <a
+              *ngFor="let borderCountry of borderCountryArray"
+              class="
+                cursor-pointer
+                flex
+                flex-col
+                items-center
+                gap-1
+              "
+            >
+              <img
+                src="https://flagcdn.com/w2560/{{ this.borderCountry.cca2.toLowerCase() }}.png"
+                [alt]="'Flag of ' + borderCountry.name.common"
+              >
+              <span
+                class="
+                  text-xs
+                  text-white
+                "
+              >
+                {{ borderCountry.name.common }}
+              </span>
+            </a>
+          </div>
+        } @else {
+          <div
+            class="
+              flex
+              justify-center
+              items-center
+              w-full
             "
           >
-            <img
-              class="
-                rounded
-                object-cover
-                w-auto
-                h-16
-              "
-              [src]="borderCountry.flags.svg"
-              [alt]="'Flag of ' + borderCountry.name.common"
-            >
-            <span
-              class="
-                text-xs
-                text-white
-              "
-            >
-              {{ borderCountry.name.common }}
-            </span>
-          </a>
-        </div>
+            This country don't have borders
+          </div>
+        }
       </div>
     </section>
   </main>

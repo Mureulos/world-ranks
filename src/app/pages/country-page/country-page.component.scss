@@ -41,7 +41,14 @@
       @apply
         rounded
         object-cover
-        w-54
-        h-10
+        w-108
+        h-16
     }
+
+  .border {
+    @apply
+      border-1
+      border-solid
+      border-mid-grey
   }
+}

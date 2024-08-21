@@ -15,4 +15,11 @@
       transition-all
     hover:bg-dodger-blue
   }
+
+  .border {
+    @apply
+      border-1
+      border-solid
+      border-mid-grey
+  }
 }

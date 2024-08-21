@@ -36,7 +36,9 @@ export class CountryPageComponent {
   public navigateToCountry(country: CountryType) {
     this.router.navigate(['/country', country.name.common], {
       state: { countryData: country }
-    });
+    }).then(() => {
+      window.location.reload()
+    })
   }
 
   public searchBorderCountries(borders: string[]) {
