@@ -26,10 +26,10 @@ export interface CountryType {
   status: string;
   unMember: boolean;
   currencies: {
-    NOK: {
+    [key: string]: {
       name: string;
       symbol: string;
-    };
+    }
   };
   idd: {
     root: string;
@@ -39,11 +39,7 @@ export interface CountryType {
   altSpellings: string[];
   region: string;
   subregion: string;
-  languages: {
-    nno: string;
-    nob: string;
-    smi: string;
-  };
+  languages: string[];
   translations: {
     ara: Translation;
     bre: Translation;

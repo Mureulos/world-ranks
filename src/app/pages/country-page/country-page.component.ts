@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CountryType } from '../../shared/interface/types';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { CountriesService } from '../../shared/services/countries.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-country-page',
@@ -12,14 +13,42 @@ import { map } from 'rxjs';
   styleUrl: './country-page.component.scss'
 })
 export class CountryPageComponent {
-  countryData: CountryType | null = null;
+  countryData: CountryType | null = null
+  borderCountries: any[] = []
 
-  constructor(private router: Router) {}
+  constructor(
+    private countriesService: CountriesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.countryData = history.state.countryData;
+
     if (!this.countryData) {
       this.router.navigate(['/']);
     }
+
+    if(this.countryData?.borders) {
+      this.searchBorderCountries(this.countryData.borders)
+    }
+  }
+
+  public navigateToCountry(country: CountryType) {
+    this.router.navigate(['/country', country.name.common], {
+      state: { countryData: country }
+    });
+  }
+
+  public searchBorderCountries(borders: string[]) {
+    const requests = borders.map(code => this.countriesService.getCountryByCode(code));
+
+    forkJoin(requests).subscribe({
+      next: (responses: any[]) => {
+        this.borderCountries = responses;
+      },
+      error: error => {
+        console.error('Erro ao buscar países de fronteira', error)
+      }
+    });
   }
 }

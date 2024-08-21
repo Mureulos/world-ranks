@@ -38,9 +38,9 @@ export class CountriesService {
   //   return this.httpClient.get<CountryType>(`${this.urlName}${name}`)
   // }
 
-  // getCountryByCode(code: string): Observable<CountryType> {
-  //   return this.httpClient.get<CountryType>(`${this.urlCode}${code}`)
-  // }
+  getCountryByCode(code: string): Observable<CountryType> {
+    return this.httpClient.get<CountryType>(`${this.urlCode}${code}`)
+  }
 
   // getCountryByLanguage(language: string): Observable<CountryType[]> {
   //   return this.httpClient.get<CountryType[]>(`${this.urlLanguage}${language}`)

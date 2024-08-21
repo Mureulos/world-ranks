@@ -28,13 +28,15 @@
           class="
             rounded
             object-cover
-            relative 
+            relative
+            max-w-96 
+            w-auto
             h-48 
             bottom-16
             cursor-pointer
           "
-          src="https://flagcdn.com/w2560/{{ this.countryData.cca2.toLowerCase() }}.png"
-          alt="Flag of {{ this.countryData.name.common }}"
+          [src]="this.countryData.flags.svg"
+          alt="Flag of {{ this.countryData.name.nativeName.nno }}"
         >
       </a>
       
@@ -88,34 +90,89 @@
         <p>{{ this.countryData.capital }}</p>
       </div>
 
-      <div class="countryInfos">
-        <h3>Subregion</h3>
-        <p>{{ this.countryData.subregion }}</p>
-      </div>
+      @if(this.countryData.subregion) {
+        <div class="countryInfos">
+          <h3>Subregion</h3>
+          <p>{{ this.countryData.subregion }}</p>
+        </div>
+      } @else {
+        <div class="countryInfos">
+          <h3>Region</h3>
+          <p>{{ this.countryData.region }}</p>
+        </div>
+      }
 
       <div class="countryInfos">
         <h3>Language</h3>
-        <p>{{ this.countryData.languages }}</p>
+
+        <div class="flex gap-2">
+          <p *ngFor="let languages of this.countryData.languages | keyvalue">
+            {{ languages.value }},
+          </p>
+        </div>
       </div>
 
       <div class="countryInfos">
         <h3>Curriences</h3>
-        <p>{{ this.countryData.currencies }}</p>
+
+        <div class="flex gap-2">
+          <p *ngFor="let currency of this.countryData.currencies | keyvalue">
+            {{ currency.value.name }},
+          </p>
+        </div>
       </div>
 
       <div class="countryInfos">
         <h3>Continents</h3>
-        <p>{{ this.countryData.continents}}</p>
+        <p>{{ this.countryData.continents }}</p>
       </div>
     </section>
     
-    <section class="countryInfos flex flex-col" >
+    <section class="countryInfos flex flex-col gap-4">
       <h3>Neighbouring Countries</h3>
 
       <div class="flagsContainer">
-
+        <div
+          *ngFor="let borderCountryArray of this.borderCountries"
+          class="
+            cursor-pointer
+            flex
+            justify-center
+            items-center
+          "
+          (click)="navigateToCountry(borderCountryArray[0])"
+        >
+          <a
+            *ngFor="let borderCountry of borderCountryArray"
+            class="
+              cursor-pointer
+              flex
+              flex-col
+              items-center
+              gap-1
+            "
+          >
+            <img
+              class="
+                rounded
+                object-cover
+                w-auto
+                h-16
+              "
+              [src]="borderCountry.flags.svg"
+              [alt]="'Flag of ' + borderCountry.name.common"
+            >
+            <span
+              class="
+                text-xs
+                text-white
+              "
+            >
+              {{ borderCountry.name.common }}
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
 }
-
