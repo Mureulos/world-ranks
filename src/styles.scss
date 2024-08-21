@@ -32,6 +32,16 @@ app-home, app-country-page {
     top: 0;
 }
 
+app-footer {
+    margin-top: 2rem;
+    height: 96px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
 @media (min-width: 500px) {
     app-home, app-country-page {
         position: relative;

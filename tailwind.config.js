@@ -39,6 +39,7 @@ module.exports = {
       },
 
       borderWidth: {
+        "05": "0.5px",
         "1": "1px",
         "3": "3px"
       },
@@ -54,6 +55,9 @@ module.exports = {
         "100": "420px",
         "108": "108px",
         "1": "1px"
+      },
+      maxWidth: {
+        "1250": "1250px"
       }
     },
   },
