@@ -26,26 +26,72 @@
         Sort by
       </label>
 
-      <select 
-        id="sort-countries" 
+      <div
         class="
-          mt-3
-          w-full 
-          p-2.5 
-          outline-none
-          bg-dark-jungle-green
-          border-3
+          flex
+          justify-between
+          cursor-pointer
+          py-2
+          px-4
+          border-2
+          border-solid
           border-baltic-sea
-          font-semibold
-          text-sm 
-          appearance-none
         "
+        (click)="showOptions()"
       >
-        <option selected>Population</option>
-        <option>Area(km²)</option>
-        <option>Alphabetically, A-Z</option>        
-        <option>Alphabetically, Z-A</option>
-      </select>
+        {{ this.criteriaSort }}
+
+        @if (apearClass) {
+          <img src="assets/svg/angle_up.svg" alt="Angle up icon">
+        } @else {
+          <img src="assets/svg/angle_down.svg" alt="Angle down icon">
+        }
+      </div>
+
+      <nav
+        class="
+          flex-col
+          rounded-sm
+          mt-2
+          p-2
+          gap-1
+          bg-baltic-sea
+        "
+
+        [ngClass]="{
+          'apear': apearClass,
+          'disapear': disapearClass
+        }"
+        
+      >
+        <span 
+          class="customOption"
+          (click)="emitSort('Population')"
+        >
+          Population
+        </span>
+
+        <span 
+          class="customOption"
+          (click)="emitSort('Area(km²)')"
+        >
+          Area(km²)
+        </span>
+
+        <span 
+          class="customOption"
+          (click)="emitSort('Alphabetically, A-Z')"
+        >
+          Alphabetically, A-Z
+        </span>
+
+        <span 
+          class="customOption"
+          (click)="emitSort('Alphabetically, Z-A')"
+        >
+          Alphabetically, Z-A
+        </span>
+      </nav>
     </div>
 
     <div>

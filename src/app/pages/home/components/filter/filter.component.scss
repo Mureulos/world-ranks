@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .customOption {
+    @apply
+      cursor-pointer
+      rounded-5
+      py-1
+      px-2
+      text-xs
+      text-iron
+      hover:bg-dodger-blue
+  }
+
+  .apear {
+    @apply
+      flex
+  }
+
+  .disapear {
+    @apply
+      hidden
+  }
+}

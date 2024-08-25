@@ -29,10 +29,11 @@ export class HomeComponent implements OnInit {
     this.getAllCountries()
   }
 
-  getAllCountries(): void {
+  public getAllCountries(): void {
     this.countriesService.getAllCountries().subscribe({
       next: response => {
         this.allCountriesData = response
+
         this.countriesDataSortByName = this.allCountriesData.sort((a, b) => {
           return a.name.common.localeCompare(b.name.common)
         })
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  changePage(page: number): void {
+  public changePage(page: number): void {
     if (page < 1 || page > this.totalPages) {
       return
     }
@@ -54,5 +55,24 @@ export class HomeComponent implements OnInit {
     const end = start + this.itemsPerPage
 
     this.countriesData = this.allCountriesData.slice(start, end)
+  }
+
+  public sortTable(criteria: string) {
+    switch(criteria) {
+      case 'Population':
+        this.countriesData.sort((a, b) => a.population - b.population)
+        break
+      case 'Area(km²)':
+        this.countriesData.sort((a, b) => a.area - b.area)
+        break
+      case 'Alphabetically, A-Z':
+        this.countriesData.sort((a, b) => a.name.common.localeCompare(b.name.common))
+        break
+      case 'Alphabetically, Z-A':
+        this.countriesData.sort((a, b) => b.name.common.localeCompare(a.name.common))
+        break
+      default:
+
+    }
   }
 }
