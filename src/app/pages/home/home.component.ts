@@ -14,41 +14,45 @@ import { SearchFieldComponent } from './components/search-field/search-field.com
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  countriesData: CountryType[] = [];
-  allCountriesData: CountryType[] = [];
-  
-  pages: number[] = [];
-  totalPages: number = 0;
-  itemsPerPage: number = 15;
-  currentPage: number = 1;
+  countriesData: CountryType[] = []
+  allCountriesData: CountryType[] = []
+  countriesDataSortByName: CountryType[] = []
+
+  pages: number[] = []
+  totalPages: number = 0
+  itemsPerPage: number = 15
+  currentPage: number = 1
 
   constructor(private countriesService: CountriesService) {}
 
   ngOnInit(): void {
-    this.getAllCountries();
+    this.getAllCountries()
   }
 
   getAllCountries(): void {
     this.countriesService.getAllCountries().subscribe({
       next: response => {
-        this.allCountriesData = response;
-        this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage);
-        this.changePage(this.currentPage);
+        this.allCountriesData = response
+        this.countriesDataSortByName = this.allCountriesData.sort((a, b) => {
+          return a.name.common.localeCompare(b.name.common)
+        })
+
+        this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage)
+        this.changePage(this.currentPage)
       },
       error: error => console.error(error)
-    });
+    })
   }
 
   changePage(page: number): void {
     if (page < 1 || page > this.totalPages) {
-      return;
+      return
     }
 
-    this.currentPage = page;
+    this.currentPage = page
+    const start = (page - 1) * this.itemsPerPage
+    const end = start + this.itemsPerPage
 
-    const start = (page - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    
-    this.countriesData = this.allCountriesData.slice(start, end);
+    this.countriesData = this.allCountriesData.slice(start, end)
   }
 }

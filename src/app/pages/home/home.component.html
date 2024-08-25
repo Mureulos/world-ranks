@@ -8,7 +8,10 @@
     border
   "
 >
-  <app-search-field class="w-full"></app-search-field>
+  <app-search-field 
+    class="w-full"
+    [NumberCountries]="allCountriesData.length"
+  ></app-search-field>
   
   <section 
     class="
@@ -17,10 +20,15 @@
       gap-8
     " 
   >
-    <app-filter class="max-w-72 w-full"></app-filter>
+    <app-filter 
+      class="max-w-72 w-full"
+    ></app-filter>
 
     <div class="overflow-auto">
-      <app-countries-table class="w-full" [data]="countriesData"></app-countries-table>
+      <app-countries-table 
+        class="w-full" 
+        [data]="countriesData"
+      ></app-countries-table>
     </div>
   </section>
 
