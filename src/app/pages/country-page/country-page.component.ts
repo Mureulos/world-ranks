@@ -23,6 +23,7 @@ export class CountryPageComponent {
 
   ngOnInit(): void {
     this.countryData = history.state.countryData;
+    console.log(this.countryData)
 
     if (!this.countryData) {
       this.router.navigate(['/']);
@@ -33,24 +34,25 @@ export class CountryPageComponent {
     }
   }
 
-  public navigateToCountry(country: CountryType) {
-    this.router.navigate(['/country', country.name.common], {
-      state: { countryData: country }
-    }).then(() => {
-      window.location.reload()
-    })
-  }
-
   public searchBorderCountries(borders: string[]) {
     const requests = borders.map(code => this.countriesService.getCountryByCode(code));
 
     forkJoin(requests).subscribe({
-      next: (responses: any[]) => {
-        this.borderCountries = responses;
-      },
-      error: error => {
-        console.error('Erro ao buscar países de fronteira', error)
-      }
+      next: (responses: any[]) => {this.borderCountries = responses;},
+      error: error => console.error('Erro ao buscar países de fronteira', error)
     });
+  }
+  
+  public navigateToCountry(country: CountryType) {
+    this.router.navigate(['/country', country.name.common], {
+      state: { countryData: country }
+    })
+    .then(
+      () => window.location.reload()
+    )
+  }
+
+  public navigateToHome() {
+    this.router.navigate([''])
   }
 }

@@ -1,4 +1,25 @@
 @if(this.countryData != null) {
+  <figure
+    class="
+      hidden
+      absolute
+      rounded-full
+      p-2
+      bg-baltic-sea
+      cursor-pointer
+      apear
+      z-50
+      left-4
+      -top-44
+    "
+    (click)="navigateToHome()"
+  >
+    <img 
+      src="assets/svg/arrow_left.svg" 
+      alt="Back to home"
+    >
+  </figure>
+
   <main
     class="
       container
@@ -17,7 +38,27 @@
       items-center
       py-6
       px-8
+      relative
     ">
+      <figure
+        class="
+          absolute
+          rounded-full
+          top-7
+          -left-24
+          p-2
+          bg-baltic-sea
+          cursor-pointer
+          disapear
+        "
+        (click)="navigateToHome()"
+      >
+        <img 
+          src="assets/svg/arrow_left.svg" 
+          alt="Back to home"
+        >
+      </figure>
+
       <a 
         [href]="countryData.maps.googleMaps" 
         target="_blank"
@@ -38,8 +79,15 @@
         >
       </a>
       
-      <div class="flex flex-col gap-4 items-center">
-        <h1 class="text-4xl font-bold">{{ this.countryData.name.common }}</h1>
+      <div 
+        class="
+        flex 
+        flex-col 
+        gap-4 
+        items-center"
+      >
+        <h1 
+          class="text-4xl font-bold">{{ this.countryData.name.common }}</h1>
         <h2>{{ this.countryData.name.official }}</h2>
       </div>
 
@@ -59,6 +107,8 @@
             p-4
             bg-baltic-sea
             text-sm
+            mobile: w-full
+            mobile: justify-evenly
           "
         >
           Population
@@ -73,6 +123,8 @@
             p-4
             bg-baltic-sea
             text-sm
+            mobile: w-full
+            mobile: justify-evenly
           "
         >
           Area (Km2)
@@ -129,7 +181,11 @@
     <section class="countryInfos flex flex-col gap-4">
       <h3>Neighbouring Countries</h3>
 
-      <div class="flagsContainer">
+      <div class="
+        flagsContainer
+        justify-around
+        laptop: justify-start
+      ">
         @if(this.countryData.borders) {
           <div
             *ngFor="let borderCountryArray of this.borderCountries"

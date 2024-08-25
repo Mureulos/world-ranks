@@ -52,3 +52,17 @@
       border-baltic-sea
   }
 }
+
+@media (max-width: 758px) {
+  .apear {
+    display: flex;
+  }
+  
+  .disapear {
+    display: none;
+  }
+}
+
+@media (min-width: 758px) {
+  
+}
