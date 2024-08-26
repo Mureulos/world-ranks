@@ -1,3 +1,4 @@
+// home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../../shared/services/countries.service';
 import { CountryType } from '../../shared/interface/types';
@@ -14,65 +15,63 @@ import { SearchFieldComponent } from './components/search-field/search-field.com
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  countriesData: CountryType[] = []
-  allCountriesData: CountryType[] = []
-  countriesDataSortByName: CountryType[] = []
+  countriesData: CountryType[] = [];
+  allCountriesData: CountryType[] = [];
+  countriesDataSort: CountryType[] = [];
 
-  pages: number[] = []
-  totalPages: number = 0
-  itemsPerPage: number = 15
-  currentPage: number = 1
+  pages: number[] = [];
+  totalPages: number = 0;
+  itemsPerPage = 15;
+  currentPage = 1;
 
   constructor(private countriesService: CountriesService) {}
 
   ngOnInit(): void {
-    this.getAllCountries()
+    this.getAllCountries();
   }
 
-  public getAllCountries(): void {
+  public getAllCountries(sortCriteria: string = 'Alphabetically, A-Z'): void {
     this.countriesService.getAllCountries().subscribe({
-      next: response => {
-        this.allCountriesData = response
-
-        this.countriesDataSortByName = this.allCountriesData.sort((a, b) => {
-          return a.name.common.localeCompare(b.name.common)
-        })
-
-        this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage)
-        this.changePage(this.currentPage)
+      next: (response) => {
+        this.allCountriesData = response;
+        this.countriesDataSort = this.sortCountries(this.allCountriesData, sortCriteria);
+        this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage);
+        this.paginate(this.currentPage);
       },
-      error: error => console.error(error)
-    })
+      error: (error) => console.error(error),
+    });
   }
 
-  public changePage(page: number): void {
+  public sortCountries(data: CountryType[], criteria: string): CountryType[] {
+    switch (criteria) {
+      case 'Population':
+        return data.sort((a, b) => b.population - a.population);
+
+      case 'Area(km²)':
+        return data.sort((a, b) => b.area - a.area);
+
+      case 'Alphabetically, Z-A':
+        return data.sort((a, b) => b.name.common.localeCompare(a.name.common));
+
+      default: 
+        return data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+    }
+  }
+
+  public paginate(page: number): void {
     if (page < 1 || page > this.totalPages) {
       return
     }
 
-    this.currentPage = page
-    const start = (page - 1) * this.itemsPerPage
-    const end = start + this.itemsPerPage
-
-    this.countriesData = this.allCountriesData.slice(start, end)
+    this.currentPage = page;
+    const start = (page - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    
+    this.countriesData = this.countriesDataSort.slice(start, end);
   }
 
-  public sortTable(criteria: string) {
-    switch(criteria) {
-      case 'Population':
-        this.countriesData.sort((a, b) => a.population - b.population)
-        break
-      case 'Area(km²)':
-        this.countriesData.sort((a, b) => a.area - b.area)
-        break
-      case 'Alphabetically, A-Z':
-        this.countriesData.sort((a, b) => a.name.common.localeCompare(b.name.common))
-        break
-      case 'Alphabetically, Z-A':
-        this.countriesData.sort((a, b) => b.name.common.localeCompare(a.name.common))
-        break
-      default:
-
-    }
+  public handleSort(criteria: string): void {
+    this.countriesDataSort = this.sortCountries(this.allCountriesData, criteria);
+    this.paginate(this.currentPage);
   }
 }
