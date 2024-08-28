@@ -3,14 +3,28 @@
 @tailwind utilities;
 
 @layer components {
+  .filterSection > label {
+    @apply
+      text-xs
+      text-pale-sky
+      font-bold
+      mb-4
+  }
+
+  .filterSection > div {
+    @apply
+      flex
+      items-center
+  }
+
   .customOption {
     @apply
-      cursor-pointer
-      rounded-5
       py-1
       px-2
-      text-xs
+      rounded-5
+      text-sm
       text-iron
+      cursor-pointer
       hover:bg-dodger-blue
   }
 

@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  .searchInput {
+    @apply 
+        static
+        py-3
+        px-4
+        pl-14
+        font-medium
+        text-sm
+        rounded-sm
+        outline-none
+        bg-baltic-sea
+        focus:border-05
+        focus:border-pale-sky
+        focus:border-solid
+        tablet:max-w-96
+  }
+}

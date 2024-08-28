@@ -119,3 +119,7 @@ export interface Demonym {
   f: string;
   m: string;
 }
+
+export interface searchType {
+
+}

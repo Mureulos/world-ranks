@@ -8,34 +8,41 @@
     gap-8
   "
 >
-    <span 
+  <span 
+    class="
+      font-bold
+      text-pale-sky
+    "
+  >
+    Found {{ NumberCountries }} countries
+  </span>
+
+  <form
+    class="
+      bg-baltic-sea
+      max-w-96
+      w-96
+    "
+  >
+    <figure
       class="
-        font-bold
-        text-pale-sky
+        absolute
+        top-9
       "
     >
-      Found {{ NumberCountries }} countries
-    </span>
-
+      <img src="assets/svg/search.svg" alt="Search icon">
+    </figure>
+    
     <input 
+      class="
+        searchInput
+        w-full
+      "
+      #searchCountryInput
       type="text" 
       placeholder="Search by Name, Region, Subregion"
-      class="
-        py-3
-        px-4
-        pl-14
-        w-full
-        font-medium
-        text-sm
-        text-left
-        rounded-sm
-        text-iron
-        bg-baltic-sea
-        outline-none
-        focus:border-05
-        focus:border-pale-sky
-        focus:border-solid
-        tablet:max-w-96
-      "
+      class="searchInput w-full"
+      (input)="onSearch(searchCountryInput.value)"
     >
+  </form>
 </section>

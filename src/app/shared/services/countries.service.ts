@@ -34,9 +34,9 @@ export class CountriesService {
     return this.httpClient.get<CountryType[]>(this.urlAllCountries);
   }
 
-  // getCountryByFullName(name: string): Observable<CountryType> {
-  //   return this.httpClient.get<CountryType>(`${this.urlName}${name}`)
-  // }
+  getCountryByFullName(name: string): Observable<CountryType> {
+    return this.httpClient.get<CountryType>(`${this.urlName}${name}`)
+  }
 
   getCountryByCode(code: string): Observable<CountryType> {
     return this.httpClient.get<CountryType>(`${this.urlCode}${code}`)
@@ -50,9 +50,9 @@ export class CountriesService {
   //   return this.httpClient.get<CountryType>(`${this.urlCapitalCity}${city}`)
   // }
 
-  // getCountryByRegion(region: string): Observable<CountryType[]> {
-  //   return this.httpClient.get<CountryType[]>(`${this.urlRegion}${region}`)
-  // }
+  getCountryByRegion(region: string): Observable<CountryType[]> {
+    return this.httpClient.get<CountryType[]>(`${this.urlRegion}${region}`)
+  }
 
   // getCountryBySubregion(subregion: string): Observable<CountryType[]> {
   //   return this.httpClient.get<CountryType[]>(`${this.urlSubregion}${subregion}`)

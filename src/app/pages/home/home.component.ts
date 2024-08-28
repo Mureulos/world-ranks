@@ -36,10 +36,21 @@ export class HomeComponent implements OnInit {
         this.allCountriesData = response;
         this.countriesDataSort = this.sortCountries(this.allCountriesData, sortCriteria);
         this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage);
-        this.paginate(this.currentPage);
+        this.changePage(this.currentPage);
       },
       error: (error) => console.error(error),
     });
+  }
+
+  public handleSearch(searchTerm: string): void {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    this.countriesDataSort = this.allCountriesData.filter(country =>
+      country.name.common.toLowerCase().includes(lowerCaseSearchTerm) ||
+      country.region.toLowerCase().includes(lowerCaseSearchTerm) ||
+      (country.cca2 && country.cca2.toLowerCase().includes(lowerCaseSearchTerm))
+    );
+    this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage);
+    this.changePage(1);
   }
 
   public sortCountries(data: CountryType[], criteria: string): CountryType[] {
@@ -58,7 +69,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public paginate(page: number): void {
+  public changePage(page: number): void {
     if (page < 1 || page > this.totalPages) {
       return
     }
@@ -72,6 +83,6 @@ export class HomeComponent implements OnInit {
 
   public handleSort(criteria: string): void {
     this.countriesDataSort = this.sortCountries(this.allCountriesData, criteria);
-    this.paginate(this.currentPage);
+    this.changePage(this.currentPage);
   }
 }

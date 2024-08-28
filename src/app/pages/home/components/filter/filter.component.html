@@ -1,189 +1,159 @@
 <form 
   action=""
   class="
+    flex
+    flex-col
+    gap-8
     max-w-96
     w-full
     onlytablet: max-w-full
   "
 >
-	<section
-    class="
-      flex
-      flex-col
-      gap-8
-    "
-	>
-    <div>
-      <label
-        for="sort-countries" 
-        class="
-          text-xs
-          text-pale-sky
-          font-bold
-          mb-4
-        "
-      >
-        Sort by
-      </label>
+  <section class="filterSection">
+    <label>Sort by</label>
 
-      <div
+    <div
+      class="
+        justify-between
+        cursor-pointer
+        py-2
+        px-4
+        border-2
+        border-solid
+        border-baltic-sea
+      "
+      (click)="showOptions()"
+    >
+      {{ this.criteriaSort }}
+
+      @if (apearClass) {
+        <img src="assets/svg/angle_up.svg" alt="Angle up icon">
+      } @else {
+        <img src="assets/svg/angle_down.svg" alt="Angle down icon">
+      }
+    </div>
+
+    <nav
+      class="
+        flex-col
+        mt-2
+        p-2
+        gap-1
+        bg-baltic-sea
+        rounded-sm
+      "
+
+      [ngClass]="{
+        'apear': apearClass,
+        'disapear': disapearClass
+      }"
+      
+    >
+      <span 
+        class="customOption"
+        (click)="emitSort('Population')"
+      >
+        Population
+      </span>
+
+      <span 
+        class="customOption"
+        (click)="emitSort('Area(km²)')"
+      >
+        Area(km²)
+      </span>
+
+      <span 
+        class="customOption"
+        (click)="emitSort('Alphabetically, A-Z')"
+      >
+        Alphabetically, A-Z
+      </span>
+
+      <span 
+        class="customOption"
+        (click)="emitSort('Alphabetically, Z-A')"
+      >
+        Alphabetically, Z-A
+      </span>
+    </nav>
+  </section>
+
+  <section class="filterSection">
+    <label>Region</label>
+
+    <div></div>
+  </section>
+
+  <section class="filterSection">
+    <label>Status</label>
+
+    <div>
+      <input 
+        checked 
+        id="checked-checkbox" 
+        type="checkbox" 
+        value="" 
         class="
-          flex
-          justify-between
-          cursor-pointer
-          py-2
-          px-4
-          border-2
+          w-4
+          h-4
+          border-1
           border-solid
           border-baltic-sea
+          bg-dark-jungle-green
+          outline-none
+          border-gray-300 
+          rounded-,d
+          focus:ring-blue-500 
+          focus:ring-2 
         "
-        (click)="showOptions()"
       >
-        {{ this.criteriaSort }}
-
-        @if (apearClass) {
-          <img src="assets/svg/angle_up.svg" alt="Angle up icon">
-        } @else {
-          <img src="assets/svg/angle_down.svg" alt="Angle down icon">
-        }
-      </div>
-
-      <nav
+      <label 
+        for="checked-checkbox" 
         class="
-          flex-col
-          rounded-sm
-          mt-2
-          p-2
-          gap-1
-          bg-baltic-sea
-        "
-
-        [ngClass]="{
-          'apear': apearClass,
-          'disapear': disapearClass
-        }"
-        
+          ms-2 
+          font-medium 
+          text-sm 
+          text-gray-900 
+          dark:text-gray-300"
       >
-        <span 
-          class="customOption"
-          (click)="emitSort('Population')"
-        >
-          Population
-        </span>
-
-        <span 
-          class="customOption"
-          (click)="emitSort('Area(km²)')"
-        >
-          Area(km²)
-        </span>
-
-        <span 
-          class="customOption"
-          (click)="emitSort('Alphabetically, A-Z')"
-        >
-          Alphabetically, A-Z
-        </span>
-
-        <span 
-          class="customOption"
-          (click)="emitSort('Alphabetically, Z-A')"
-        >
-          Alphabetically, Z-A
-        </span>
-      </nav>
+        Independent
+      </label>
     </div>
 
     <div>
-      <label
+      <input 
+        checked 
+        id="checked-checkbox" 
+        type="checkbox" 
+        value="" 
         class="
-          text-xs
-          text-pale-sky
-          font-bold
-          mb-4
+          w-4
+          h-4
+          border-1
+          border-solid
+          border-baltic-sea
+          bg-dark-jungle-green
+          outline-none
+          border-gray-300 
+          rounded-,d
+          focus:ring-blue-500 
+          focus:ring-2 
         "
       >
-        Status
+
+      <label 
+        for="checked-checkbox" 
+        class="
+          ms-2 
+          text-sm 
+          font-medium 
+          text-gray-900 
+          dark:text-gray-300
+        "
+      >
+        Member of the United Nations
       </label>
-
-      <div 
-        class="
-          flex 
-          items-center
-        "
-      >
-        <input 
-          checked 
-          id="checked-checkbox" 
-          type="checkbox" 
-          value="" 
-          class="
-            w-4
-            h-4
-            border-1
-            border-solid
-            border-baltic-sea
-            bg-dark-jungle-green
-            outline-none
-            border-gray-300 
-            rounded-,d
-            focus:ring-blue-500 
-            focus:ring-2 
-          "
-        >
-
-        <label 
-          for="checked-checkbox" 
-          class="
-            ms-2 
-            text-sm 
-            font-medium 
-            text-gray-900 
-            dark:text-gray-300"
-        >
-          Independent
-        </label>
-      </div>
-
-      <div 
-        class="
-          flex 
-          items-center
-        "
-      >
-        <input 
-          checked 
-          id="checked-checkbox" 
-          type="checkbox" 
-          value="" 
-          class="
-            w-4
-            h-4
-            border-1
-            border-solid
-            border-baltic-sea
-            bg-dark-jungle-green
-            outline-none
-            border-gray-300 
-            rounded-,d
-            focus:ring-blue-500 
-            focus:ring-2 
-          "
-        >
-
-        <label 
-          for="checked-checkbox" 
-          class="
-            ms-2 
-            text-sm 
-            font-medium 
-            text-gray-900 
-            dark:text-gray-300
-          "
-        >
-          Member of the United Nations
-        </label>
-      </div>
     </div>
-	</section>
+  </section>
 </form>

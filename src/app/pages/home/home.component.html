@@ -1,14 +1,16 @@
 <main 
   class="
     container
+    customBorder
+    flex-col
     max-w-1250
-    flex-col 
     justify-center 
     bg-dark-jungle-green
     border
   "
 >
   <app-search-field 
+    (search)="handleSearch($event)"
     class="w-full"
     [NumberCountries]="allCountriesData.length"
   ></app-search-field>
