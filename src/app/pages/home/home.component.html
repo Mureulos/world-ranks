@@ -12,7 +12,7 @@
   <app-search-field 
     (search)="handleSearch($event)"
     class="w-full"
-    [NumberCountries]="allCountriesData.length"
+    [NumberCountries]="countriesDataSort.length"
   ></app-search-field>
   
   <section 
@@ -24,6 +24,7 @@
   >
     <app-filter 
       (sort)="handleSort($event)"
+      (toggle)="handleToggle($event)"
       class="max-w-72 w-full"
     ></app-filter>
 

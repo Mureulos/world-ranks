@@ -3,18 +3,29 @@
 @tailwind utilities;
 
 @layer components {
-  .filterSection > label {
+  .customLabel {
     @apply
       text-xs
       text-pale-sky
       font-bold
-      mb-4
+      mb-8
   }
 
-  .filterSection > div {
+  .filterDiv {
     @apply
       flex
+      flex-wrap
       items-center
+      justify-start
+      gap-3
+  }
+
+  .customSelect {
+    @apply
+      flex
+      flex-wrap
+      items-center
+      justify-start
   }
 
   .customOption {
@@ -26,6 +37,27 @@
       text-iron
       cursor-pointer
       hover:bg-dodger-blue
+  }
+
+  .toggleDisabled {
+    @apply
+      py-2
+      px-3
+      text-xs
+      text-iron
+      font-medium
+      hover:bg-baltic-sea
+  }
+
+  .toggleEnabled {
+    @apply
+      py-2
+      px-3
+      text-xs
+      text-iron
+      font-bold
+      bg-dodger-blue
+      hover:bg-cornflower-blue
   }
 
   .apear {

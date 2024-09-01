@@ -6,14 +6,14 @@
     gap-8
     max-w-96
     w-full
-    onlytablet: max-w-full
   "
 >
-  <section class="filterSection">
-    <label>Sort by</label>
+  <section>
+    <label class="customLabel">Sort by</label>
 
     <div
       class="
+        customSelect
         justify-between
         cursor-pointer
         py-2
@@ -79,14 +79,27 @@
     </nav>
   </section>
 
-  <section class="filterSection">
-    <label>Region</label>
+  <section>
+    <label class="customLabel">Region</label>
 
-    <div></div>
+    <div class="filterDiv">
+      <span *ngFor="let item of toggles">
+        <button  
+          [ngClass]="{
+            'toggleDisabled': item.active == false,
+            'toggleEnabled': item.active == true,
+          }"
+
+          (click)="toggleRegion(item, $event)"
+        >
+          {{ item.name }}
+        </button>
+      </span>
+    </div>
   </section>
 
-  <section class="filterSection">
-    <label>Status</label>
+  <section>
+    <label class="customLabel">Status</label>
 
     <div>
       <input 
