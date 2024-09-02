@@ -67,9 +67,9 @@ export class FilterComponent {
   }
 
   public emitSort(criteria: string) {
-    console.log(criteria)
     this.sort.emit(criteria)
     this.criteriaSort = criteria
+    this.showSortOptions()
   }
 
   public toggleRegion(item: any, event: Event) {

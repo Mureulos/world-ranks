@@ -21,8 +21,13 @@ export class HomeComponent implements OnInit {
 
   pages: number[] = []
   totalPages: number = 0
-  itemsPerPage = 15
-  currentPage = 1
+  itemsPerPage: number = 15
+  currentPage: number = 1
+
+  criteriaSort: string = 'Alphabetically, A-Z'
+  activeRegions: string[] = ['All']
+  activeStatus: string = ''
+  searchTerm: string = ''
 
   constructor(private countriesService: CountriesService) {}
 
@@ -30,39 +35,67 @@ export class HomeComponent implements OnInit {
     this.getAllCountries()
   }
 
-  public getAllCountries(sortCriteria: string = 'Alphabetically, A-Z'): void {
-    this.countriesService.getAllCountries().subscribe({
+  public getAllCountries(): void {
+    this.countriesService.getAllCountries().subscribe({ // Chama o serviço que puxa todos os paises da api
       next: (response) => {
         this.allCountriesData = response
-        this.countriesDataSort = this.sortCountries(this.allCountriesData, sortCriteria)
-        this.totalPages = Math.ceil(this.allCountriesData.length / this.itemsPerPage)
-        this.changePage(this.currentPage)
+        this.applyCombinedFilters()
       },
       
       error: (error) => console.error(error),
     })
   }
 
-  public handleSearch(searchTerm: string): void {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase()
 
-    this.countriesDataSort = this.allCountriesData.filter(country =>
-      country.name.common.toLowerCase().includes(lowerCaseSearchTerm) ||
-      country.region.toLowerCase().includes(lowerCaseSearchTerm) ||
-      (country.cca2 && country.cca2.toLowerCase().includes(lowerCaseSearchTerm))
+  public handleSearch(searchTerm: string): void {
+    this.searchTerm = searchTerm.toLowerCase()
+    this.applyCombinedFilters()
+  }
+
+  public handleSort(criteria: string): void {
+    this.criteriaSort = criteria
+    this.applyCombinedFilters()
+  }
+
+  public handleToggle(activeRegions: string[]): void {
+    this.activeRegions = activeRegions
+    this.applyCombinedFilters()
+  }
+
+  public handleStatus(status: string): void {
+    this.activeStatus = status
+    this.applyCombinedFilters()
+  }
+
+
+  public applyCombinedFilters(): void {
+    let filteredData = this.allCountriesData
+
+    filteredData = this.allCountriesData.filter(country =>
+      // caso o nome dos paises inclua o termo da pesquisa
+      country.name.common.toLowerCase().includes(this.searchTerm) || 
+
+      // caso o código dos paises inclua o termo da pesquisa
+      (country.cca2 && country.cca2.toLowerCase().includes(this.searchTerm)) 
     )
 
+    if (!this.activeRegions.includes('All')) { // Caso não inclua All
+      filteredData = filteredData.filter(country => this.activeRegions.includes(country.region)) // Filtra pela região
+    } 
+    
+    filteredData = this.filterStatusCountries(filteredData, this.activeStatus) // Filtra pelo status
+    this.countriesDataSort = this.sortCountries(filteredData, this.criteriaSort) // Ordena de acordo com o criterio
+
+    /*
+      Atribui o total de paginas. Arredonda a divisão da quantidade 
+      de elementos dos paises ordenados pela quantidade de itens por página
+    */
     this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage)
     this.changePage(1)
   }
   
-  public handleSort(criteria: string): void {
-    this.countriesDataSort = this.sortCountries(this.allCountriesData, criteria)
-    this.changePage(this.currentPage)
-  }
-  
   public sortCountries(data: CountryType[], criteria: string): CountryType[] {
-    switch (criteria) {
+    switch (criteria) { // Ordena o array de paises de acordo com o critério
       case 'Population':
         return data.sort((a, b) => b.population - a.population)
 
@@ -72,52 +105,38 @@ export class HomeComponent implements OnInit {
       case 'Alphabetically, Z-A':
         return data.sort((a, b) => b.name.common.localeCompare(a.name.common))
 
-      default: 
+      default: // A até Z
         return data.sort((a, b) => a.name.common.localeCompare(b.name.common))
     }
   }
 
-  public handleToggle(activeRegions: string[]): void {
-    if (activeRegions.includes('All')) {
-      this.countriesDataSort = this.allCountriesData
-
-    } else {
-      this.countriesDataSort = this.allCountriesData
-        .filter(country => activeRegions.includes(country.region))
-    }
-    
-    this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage)
-    this.changePage(1)
-  }
-
-  public handleStatus(status: string): void {
-    this.countriesDataSort = this.filterStatusCountries(this.allCountriesData, status)
-    this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage)
-    this.changePage(1)
-  }
-
   public filterStatusCountries(data: CountryType[], status: string): CountryType[] {
-    switch (status) {
-      case 'Member of the United Nations':
-        return data.sort((a, b) => b.population - a.population)
-
-      case 'Independent':
-        return data.sort((a, b) => b.area - a.area)
-
-      default: 
-        return data
+    if (status === 'Member of the United Nations') { // paises que pertencem as nações unidas
+      return data.filter(country => country.unMember === true)
+    } 
+    
+    else if (status === 'Independent') { // paises que pertencem as nações unidas
+      return data.filter(country => country.independent === true)
+    } 
+    
+    else { //Sem status de paises
+      return data
     }
   }
 
   public changePage(page: number): void {
-    if (page < 1 || page > this.totalPages) {
-      return
-    }
+    if (page < 1 || page > this.totalPages) // Caso esteja não ultima ou na primera página
+      return // Impede a mudança de página
 
-    this.currentPage = page
-    const start = (page - 1) * this.itemsPerPage
-    const end = start + this.itemsPerPage
+    // Atribui a pagina para atual
+    this.currentPage = page 
+
+    // Define o inicio da paginação de acordo com a aritmética
+    const start = (page - 1) * this.itemsPerPage 
     
-    this.countriesData = this.countriesDataSort.slice(start, end)
+    // Define o final da paginação de acordo com a aritmética
+    const end = start + this.itemsPerPage 
+
+    this.countriesData = this.countriesDataSort.slice(start, end) // Corta o array de paises de acordo com o inicio e o final
   }
 }
