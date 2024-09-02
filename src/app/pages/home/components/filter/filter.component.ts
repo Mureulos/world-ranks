@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, Output, EventEmitter } from '@angular/core'
 import { map, filter, find } from 'rxjs';
+import { FilterType } from '../../../../shared/interface/types';
 
 @Component({
   selector: 'app-filter',
@@ -10,8 +11,18 @@ import { map, filter, find } from 'rxjs';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
+  @Output() sort = new EventEmitter<string>()
+  criteries = [
+    'Population',
+    'Area(km²)',
+    'Alphabetically, A-Z',
+    'Alphabetically, Z-A'
+  ]
+  apearSortClass: boolean = false
+  criteriaSort: string = 'Alphabetically, A-Z'
+
   @Output() toggle = new EventEmitter()
-  toggles = [
+  togglesOptions: FilterType[] = [
     {
       name: 'All',
       active: true,
@@ -37,18 +48,26 @@ export class FilterComponent {
       active: false,
     },
   ]
+
+  @Output() status = new EventEmitter<string>()
+  statusOptions: FilterType[] = [
+    {
+      name: 'Independent',
+      active: false
+    },
+    {
+      name: 'Member of the United Nations',
+      active: false
+    }
+  ]
+  apearStatusClass: boolean = false
   
-  @Output() sort = new EventEmitter<string>()
-  apearClass: boolean = false
-  disapearClass: boolean = true
-  criteriaSort: string = 'Alphabetically, A-Z'
-  
-  public showOptions() {
-    this.apearClass = !this.apearClass
-    this.disapearClass = !this.disapearClass
+  public showSortOptions() {
+    this.apearSortClass = !this.apearSortClass
   }
 
   public emitSort(criteria: string) {
+    console.log(criteria)
     this.sort.emit(criteria)
     this.criteriaSort = criteria
   }
@@ -57,12 +76,12 @@ export class FilterComponent {
     event.preventDefault()
 
     if (item.name === 'All') {
-      this.toggles.forEach(toggle => toggle.active = false)
+      this.togglesOptions.forEach(toggle => toggle.active = false)
       item.active = true
     } 
     
     else {
-      const allToggle = this.toggles.find(toggle => toggle.name === 'All')
+      const allToggle = this.togglesOptions.find(toggle => toggle.name === 'All')
       
       if (allToggle) {
         allToggle.active = false
@@ -71,10 +90,16 @@ export class FilterComponent {
       item.active = !item.active
     }
 
-    const activeRegions = this.toggles
+    const activeRegions = this.togglesOptions
       .filter(toggle => toggle.active)
       .map(toggle => toggle.name)
 
     this.toggle.emit(activeRegions)
+  }
+  
+  public checkStatus(item: any, event: Event) {
+    event.preventDefault()
+
+    item.active = !item.active
   }
 }

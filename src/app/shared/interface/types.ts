@@ -120,6 +120,7 @@ export interface Demonym {
   m: string;
 }
 
-export interface searchType {
-
+export interface FilterType {
+  name: string;
+  active: boolean;
 }

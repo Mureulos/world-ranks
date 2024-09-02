@@ -22,11 +22,11 @@
         border-solid
         border-baltic-sea
       "
-      (click)="showOptions()"
+      (click)="showSortOptions()"
     >
       {{ this.criteriaSort }}
 
-      @if (apearClass) {
+      @if (apearSortClass) {
         <img src="assets/svg/angle_up.svg" alt="Angle up icon">
       } @else {
         <img src="assets/svg/angle_down.svg" alt="Angle down icon">
@@ -44,37 +44,16 @@
       "
 
       [ngClass]="{
-        'apear': apearClass,
-        'disapear': disapearClass
+        'apear': apearSortClass,
+        'disapear': !apearSortClass
       }"
-      
     >
       <span 
+        *ngFor="let item of criteries"
         class="customOption"
-        (click)="emitSort('Population')"
+        (click)="emitSort(item)"
       >
-        Population
-      </span>
-
-      <span 
-        class="customOption"
-        (click)="emitSort('Area(km²)')"
-      >
-        Area(km²)
-      </span>
-
-      <span 
-        class="customOption"
-        (click)="emitSort('Alphabetically, A-Z')"
-      >
-        Alphabetically, A-Z
-      </span>
-
-      <span 
-        class="customOption"
-        (click)="emitSort('Alphabetically, Z-A')"
-      >
-        Alphabetically, Z-A
+        {{ item }}
       </span>
     </nav>
   </section>
@@ -83,44 +62,51 @@
     <label class="customLabel">Region</label>
 
     <div class="filterDiv">
-      <span *ngFor="let item of toggles">
-        <button  
-          [ngClass]="{
-            'toggleDisabled': item.active == false,
-            'toggleEnabled': item.active == true,
-          }"
+      <button 
+        *ngFor="let item of togglesOptions"
+        
+        [ngClass]="{
+          'toggleDisabled': item.active == false,
+          'toggleEnabled': item.active == true,
+        }"
 
-          (click)="toggleRegion(item, $event)"
-        >
+        (click)="toggleRegion(item, $event)"
+      >
           {{ item.name }}
-        </button>
-      </span>
+      </button>
     </div>
   </section>
 
   <section>
     <label class="customLabel">Status</label>
 
-    <div>
-      <input 
-        checked 
-        id="checked-checkbox" 
-        type="checkbox" 
-        value="" 
+    <div
+      class="
+        flex
+        gap-1
+        items-center
+        mb-3
+      "
+      *ngFor="let item of statusOptions"
+    >
+      <span 
+        [ngClass]="{
+          'checkboxEnabled': item.active,
+          'checkboxDisabled': !item.active
+        }"
+
         class="
-          w-4
-          h-4
-          border-1
+          w-6
+          h-6
+          rounded-5
           border-solid
-          border-baltic-sea
-          bg-dark-jungle-green
-          outline-none
-          border-gray-300 
-          rounded-,d
-          focus:ring-blue-500 
-          focus:ring-2 
+          border-iron
         "
+
+        (click)="checkStatus(item, $event)"
       >
+      </span>
+
       <label 
         for="checked-checkbox" 
         class="
@@ -130,42 +116,7 @@
           text-gray-900 
           dark:text-gray-300"
       >
-        Independent
-      </label>
-    </div>
-
-    <div>
-      <input 
-        checked 
-        id="checked-checkbox" 
-        type="checkbox" 
-        value="" 
-        class="
-          w-4
-          h-4
-          border-1
-          border-solid
-          border-baltic-sea
-          bg-dark-jungle-green
-          outline-none
-          border-gray-300 
-          rounded-,d
-          focus:ring-blue-500 
-          focus:ring-2 
-        "
-      >
-
-      <label 
-        for="checked-checkbox" 
-        class="
-          ms-2 
-          text-sm 
-          font-medium 
-          text-gray-900 
-          dark:text-gray-300
-        "
-      >
-        Member of the United Nations
+        {{ item.name }}
       </label>
     </div>
   </section>

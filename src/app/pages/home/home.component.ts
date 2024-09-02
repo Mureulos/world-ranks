@@ -60,6 +60,22 @@ export class HomeComponent implements OnInit {
     this.countriesDataSort = this.sortCountries(this.allCountriesData, criteria)
     this.changePage(this.currentPage)
   }
+  
+  public sortCountries(data: CountryType[], criteria: string): CountryType[] {
+    switch (criteria) {
+      case 'Population':
+        return data.sort((a, b) => b.population - a.population)
+
+      case 'Area(km²)':
+        return data.sort((a, b) => b.area - a.area)
+
+      case 'Alphabetically, Z-A':
+        return data.sort((a, b) => b.name.common.localeCompare(a.name.common))
+
+      default: 
+        return data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+    }
+  }
 
   public handleToggle(activeRegions: string[]): void {
     if (activeRegions.includes('All')) {
@@ -85,21 +101,5 @@ export class HomeComponent implements OnInit {
     const end = start + this.itemsPerPage
     
     this.countriesData = this.countriesDataSort.slice(start, end)
-  }
-
-  public sortCountries(data: CountryType[], criteria: string): CountryType[] {
-    switch (criteria) {
-      case 'Population':
-        return data.sort((a, b) => b.population - a.population)
-
-      case 'Area(km²)':
-        return data.sort((a, b) => b.area - a.area)
-
-      case 'Alphabetically, Z-A':
-        return data.sort((a, b) => b.name.common.localeCompare(a.name.common))
-
-      default: 
-        return data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-    }
   }
 }

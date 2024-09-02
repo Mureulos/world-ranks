@@ -60,6 +60,12 @@ module.exports = {
       },
       maxWidth: {
         "1250": "1250px"
+      },
+      backgroundColor: {
+        "transparent": "transparent"
+      },
+      backgroundImage: {
+        //'check': "url('src/assets/svg/check.svg')",
       }
     },
   },

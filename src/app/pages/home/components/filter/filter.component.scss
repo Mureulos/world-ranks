@@ -60,6 +60,23 @@
       hover:bg-cornflower-blue
   }
 
+  .checkboxDisabled {
+    @apply
+      border-2
+      bg-transparent
+      hover:border-none
+      hover:bg-dodger-blue
+  }
+
+  .checkboxEnabled {
+    @apply
+      border-none
+    bg-dodger-blue
+      hover:border-2
+      hover:bg-transparent
+      hover:bg-none
+  }
+
   .apear {
     @apply
       flex
