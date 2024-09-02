@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   itemsPerPage: number = 15
   currentPage: number = 1
 
-  criteriaSort: string = 'Alphabetically, A-Z'
+  criteriaSort: string = ''
   activeRegions: string[] = ['All']
   activeStatus: string = ''
   searchTerm: string = ''

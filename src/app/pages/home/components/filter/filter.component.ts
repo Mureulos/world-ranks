@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, Output, EventEmitter } from '@angular/core'
-import { map, filter, find } from 'rxjs';
-import { FilterType } from '../../../../shared/interface/types';
+import { FilterType } from '../../../../shared/interface/types'
 
 @Component({
   selector: 'app-filter',
@@ -11,18 +10,14 @@ import { FilterType } from '../../../../shared/interface/types';
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
-  @Output() sort = new EventEmitter<string>()
   criteries = [
     'Population',
     'Area(km²)',
     'Alphabetically, A-Z',
     'Alphabetically, Z-A'
   ]
-  apearSortClass: boolean = false
-  criteriaSort: string = 'Alphabetically, A-Z'
 
-  @Output() toggle = new EventEmitter()
-  togglesOptions: FilterType[] = [
+  regions: FilterType[] = [
     {
       name: 'All',
       active: true,
@@ -49,7 +44,6 @@ export class FilterComponent {
     },
   ]
 
-  @Output() status = new EventEmitter()
   statusOptions: FilterType[] = [
     {
       name: 'Independent',
@@ -60,7 +54,14 @@ export class FilterComponent {
       active: false
     }
   ]
+
+  criteriaSort: string = 'Alphabetically, A-Z'
+  apearSortClass: boolean = false
   apearStatusClass: boolean = false
+
+  @Output() sort = new EventEmitter<string>()
+  @Output() toggle = new EventEmitter()
+  @Output() status = new EventEmitter()
   
   public showSortOptions() {
     this.apearSortClass = !this.apearSortClass
@@ -75,16 +76,17 @@ export class FilterComponent {
   public toggleRegion(item: any, event: Event) {
     event.preventDefault()
 
-    if (item.name === 'All') {
-      this.togglesOptions.forEach(toggle => toggle.active = false)
-      item.active = true
+    if (item.name === 'All') { // Se o toggle escolhido for All
+      this.regions.forEach(toggle => toggle.active = false) // Desativa todos os toggle
+      item.active = true // Ativa o toggle All
     } else {
-      const allToggle = this.togglesOptions.find(toggle => toggle.name === 'All')
-      if (allToggle) {allToggle.active = false}
-      item.active = !item.active
+      const allToggle = this.regions.find(toggle => toggle.name === 'All')
+      if (allToggle) {allToggle.active = false } // Desativa o toggle all
+      item.active = !item.active // Ativa o toggle escolhido
     }
 
-    const activeRegions = this.togglesOptions
+    // Cria um array apenas com os toggles ativados
+    const activeRegions = this.regions
       .filter(toggle => toggle.active)
       .map(toggle => toggle.name)
 
@@ -94,9 +96,9 @@ export class FilterComponent {
   public checkStatus(item: any, event: Event) {
     event.preventDefault()
     
-    if (item.active == false) {
-      this.statusOptions.forEach(e => e.active = false)
-      item.active = true
+    if (item.active === false) { // Se o checkbox escolhido estiver desativado
+      this.statusOptions.forEach(e => e.active = false) // Desativa todos os checkbox
+      item.active = true // Ativa o checkbox escolhido
     } else {
       this.statusOptions.forEach(e => e.active = false)
     }

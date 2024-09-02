@@ -1,54 +1,28 @@
-<form 
-  action=""
-  class="
-    flex
-    flex-col
-    gap-8
-    max-w-96
-    w-full
-  "
->
+<form class="flex flex-col gap-8 max-w-96 w-full">
   <section>
     <label class="customLabel">Sort by</label>
 
     <div
-      class="
-        customSelect
-        justify-between
-        cursor-pointer
-        py-2
-        px-4
-        border-2
-        border-solid
-        border-baltic-sea
-      "
+      class="customSelect justify-between cursor-pointer py-2 px-4 border-2 border-solid border-baltic-sea"
       (click)="showSortOptions()"
     >
       {{ this.criteriaSort }}
 
       @if (apearSortClass) {
-        <img src="assets/svg/angle_up.svg" alt="Angle up icon">
+      <img src="assets/svg/angle_up.svg" alt="Angle up icon" />
       } @else {
-        <img src="assets/svg/angle_down.svg" alt="Angle down icon">
+      <img src="assets/svg/angle_down.svg" alt="Angle down icon" />
       }
     </div>
 
     <nav
-      class="
-        flex-col
-        mt-2
-        p-2
-        gap-1
-        bg-baltic-sea
-        rounded-sm
-      "
-
+      class="flex-col mt-2 p-2 gap-1 bg-baltic-sea rounded-sm"
       [ngClass]="{
         'apear': apearSortClass,
         'disapear': !apearSortClass
       }"
     >
-      <span 
+      <span
         *ngFor="let item of criteries"
         class="customOption"
         (click)="emitSort(item)"
@@ -62,17 +36,15 @@
     <label class="customLabel">Region</label>
 
     <div class="filterDiv">
-      <button 
-        *ngFor="let item of togglesOptions"
-        
+      <button
+        *ngFor="let item of regions"
         [ngClass]="{
           'toggleDisabled': item.active == false,
           'toggleEnabled': item.active == true,
         }"
-
         (click)="toggleRegion(item, $event)"
       >
-          {{ item.name }}
+        {{ item.name }}
       </button>
     </div>
   </section>
@@ -81,41 +53,22 @@
     <label class="customLabel">Status</label>
 
     <div
-      class="
-        flex
-        gap-1
-        items-center
-        mb-3
-      "
+      class="flex gap-1 items-center mb-3"
       *ngFor="let item of statusOptions"
     >
-      <span 
+      <span
+        class="w-6 h-6 rounded-5 border-solid border-iron"
+        
         [ngClass]="{
           'checkboxEnabled': item.active,
           'checkboxDisabled': !item.active
         }"
-
-        class="
-          w-6
-          h-6
-          rounded-5
-          border-solid
-          border-iron
-        "
-
+        
         (click)="checkStatus(item, $event)"
       >
       </span>
 
-      <label 
-        for="checked-checkbox" 
-        class="
-          ms-2 
-          font-medium 
-          text-sm 
-          text-gray-900 
-          dark:text-gray-300"
-      >
+      <label class="ms-2 font-medium text-sm text-gray-900 dark:text-gray-300">
         {{ item.name }}
       </label>
     </div>

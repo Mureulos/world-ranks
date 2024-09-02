@@ -1,28 +1,12 @@
-<main 
-  class="
-    container
-    customBorder
-    flex-col
-    max-w-1250
-    justify-center 
-    bg-dark-jungle-green
-    border
-  "
->
-  <app-search-field 
+<main class="container customBorder flex-col max-w-1250 justify-center bg-dark-jungle-green border">
+  <app-search-field
     (search)="handleSearch($event)"
     class="w-full"
     [NumberCountries]="countriesDataSort.length"
   ></app-search-field>
-  
-  <section 
-    class="
-      laptop:flex
-      w-full
-      gap-8
-    " 
-  >
-    <app-filter 
+
+  <section class="laptop:flex w-full gap-8">
+    <app-filter
       (sort)="handleSort($event)"
       (toggle)="handleToggle($event)"
       (status)="handleStatus($event)"
@@ -30,46 +14,26 @@
     ></app-filter>
 
     <div class="overflow-auto">
-      <app-countries-table 
-        class="w-full" 
+      <app-countries-table
+        class="w-full"
         [data]="countriesData"
       ></app-countries-table>
     </div>
   </section>
 
-  <div 
-    class="
-      flex 
-      flex-1 
-      justify-between 
-      sm:hidden mt-4
-    "
-  >
-    <button
-      (click)="changePage(currentPage - 1)"
-      class="paginatorButtons"
-    >
-      <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon">
+  <div class="flex flex-1 justify-between sm:hidden mt-4">
+    <button (click)="changePage(currentPage - 1)" class="paginatorButtons">
+      <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon" />
       Previous
     </button>
 
-    <span 
-      class="
-        px-4 
-        py-2 
-        text-sm 
-        font-medium
-      "
-    >
+    <span class="px-4 py-2 text-sm font-medium">
       Page {{ currentPage }} of {{ totalPages }}
     </span>
-    
-    <button
-      (click)="changePage(currentPage + 1)"
-      class="paginatorButtons"
-    >
+
+    <button (click)="changePage(currentPage + 1)" class="paginatorButtons">
       Next
-      <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon">
+      <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon" />
     </button>
   </div>
 </main>

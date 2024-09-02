@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CountryType } from '../../shared/interface/types';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { CountriesService } from '../../shared/services/countries.service';
-import { forkJoin } from 'rxjs';
+import { CountryType } from '../../shared/interface/types'
+import { CommonModule } from '@angular/common'
+import { Router } from '@angular/router'
+import { CountriesService } from '../../shared/services/countries.service'
+import { forkJoin } from 'rxjs'
 
 @Component({
   selector: 'app-country-page',
@@ -22,37 +22,44 @@ export class CountryPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.countryData = history.state.countryData;
-    console.log(this.countryData)
+    this.countryData = history.state.countryData // Pega os dados do pais salvo no state
 
-    if (!this.countryData) {
-      this.router.navigate(['/']);
+    if (!this.countryData) { // Caso não exista dados do pais
+      this.router.navigate(['/'])
     }
 
-    if(this.countryData?.borders) {
-      this.searchBorderCountries(this.countryData.borders)
+    console.log(this.countryData?.borders)
+
+    if(this.countryData?.borders) { // Caso o pais tenha fronteiras
+      this.searchBorderCountries(this.countryData.borders) // passa as fronteiras como parâmetro
     }
   }
 
   public searchBorderCountries(borders: string[]) {
-    const requests = borders.map(code => this.countriesService.getCountryByCode(code));
+    // Atribui em um array os dados (observables) de cada fronteira através do serviço
+    const requests = borders.map(code => { 
+      console.log(code)
+      this.countriesService.getCountryByCode(code)
+    })
 
-    forkJoin(requests).subscribe({
-      next: (responses: any[]) => {this.borderCountries = responses;},
-      error: error => console.error('Erro ao buscar países de fronteira', error)
+    console.log(requests)
+
+    forkJoin(requests).subscribe({ // Inscreve os observables no borderCountries, atribuind apenas os arrays
+      next: (responses: any[]) => {this.borderCountries = responses},
+      error: error => console.error('Erro ao buscar as fronteiras', error)
     });
   }
   
   public navigateToCountry(country: CountryType) {
-    this.router.navigate(['/country', country.name.common], {
-      state: { countryData: country }
+    this.router.navigate(['/country', country.name.common], { // Cria uma rota com nome do pais selecionado
+      state: { countryData: country } // Atribui os dados do pais selecionado para a variavel state
     })
     .then(
-      () => window.location.reload()
+      () => window.location.reload() // Recarrega a pagina a página quando a ultima ação é concluida
     )
   }
 
   public navigateToHome() {
-    this.router.navigate([''])
+    this.router.navigate(['']) // Vai para a wilcard route
   }
 }

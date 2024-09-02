@@ -1,48 +1,20 @@
-<section 
-  class="
-    w-full
-    flex
-    flex-wrap
-    justify-between
-    items-center
-    gap-8
-  "
->
-  <span 
-    class="
-      font-bold
-      text-pale-sky
-    "
-  >
+<section class="w-full flex flex-wrap justify-between items-center gap-8">
+  <span class="font-bold text-pale-sky">
     Found {{ NumberCountries }} countries
   </span>
 
-  <form
-    class="
-      bg-baltic-sea
-      max-w-96
-      w-96
-    "
-  >
-    <figure
-      class="
-        absolute
-        top-9
-      "
-    >
-      <img src="assets/svg/search.svg" alt="Search icon">
+  <form class="bg-baltic-sea max-w-96 w-96">
+    <figure class="absolute top-9">
+      <img src="assets/svg/search.svg" alt="Search icon" />
     </figure>
-    
-    <input 
-      class="
-        searchInput
-        w-full
-      "
+
+    <input
+      class="searchInput w-full"
       #searchCountryInput
-      type="text" 
+      type="text"
       placeholder="Search by Name, Region, Subregion"
       class="searchInput w-full"
       (input)="onSearch(searchCountryInput.value)"
-    >
+    />
   </form>
 </section>

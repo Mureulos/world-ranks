@@ -16,8 +16,8 @@ export class CountriesTableComponent {
   constructor(private router: Router) {}
 
   navigateToCountry(country: CountryType): void {
-    this.router.navigate(['/country', country.name.common], {
-      state: { countryData: country }
-    });
+    this.router.navigate(['/country', country.name.common], { // Cria uma rota com nome do pais selecionado
+      state: { countryData: country } // Atribui os dados do pais selecionado para a variavel state
+    })
   }
 }
