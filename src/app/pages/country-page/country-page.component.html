@@ -8,8 +8,7 @@
 
 <main class="container border p-0 gap-0 max-w-3xl flex-col justify-center bg-dark-jungle-green">
   <section class="flex flex-col items-center py-6 px-8 relative">
-    <figure
-      class="absolute rounded-full top-7 -left-24 p-2 bg-baltic-sea cursor-pointer disapear"
+    <figure class="absolute rounded-full top-7 -left-24 p-2 bg-baltic-sea cursor-pointer disapear"
       (click)="navigateToHome()"
     >
       <img src="assets/svg/arrow_left.svg" alt="Back to home" />
@@ -24,7 +23,7 @@
     </a>
 
     <div class="flex flex-col gap-4 items-center">
-      <h1 class="text-4xl font-bold">
+      <h1 class="text-4xl font-bold break-words text-center">
         {{ this.countryData.name.common }}
       </h1>
 
@@ -100,7 +99,7 @@
   <section class="countryInfos flex flex-col gap-4">
     <h3>Neighbouring Countries</h3>
 
-    <div class="flagsContainer justify-around laptop:justify-start">
+    <div class="flagsContainer justify-around">
       @if(this.countryData.borders) {
         <div
           *ngFor="let borderCountryArray of this.borderCountries"

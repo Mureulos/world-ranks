@@ -1,14 +1,6 @@
 @import './assets/scss/$_color-variables.scss';
 @import './assets/scss/$_typograph.scss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-
-}
-
 app-home, app-country-page {
     display: flex;
     justify-content:center;

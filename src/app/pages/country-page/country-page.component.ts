@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CountryType } from '../../shared/interface/types'
-import { CommonModule } from '@angular/common'
-import { Router } from '@angular/router'
-import { CountriesService } from '../../shared/services/countries.service'
-import { forkJoin } from 'rxjs'
+import { CountryType } from '../../shared/interface/types';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { CountriesService } from '../../shared/services/countries.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-country-page',
@@ -22,31 +22,26 @@ export class CountryPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.countryData = history.state.countryData // Pega os dados do pais salvo no state
+    this.countryData = history.state.countryData // Atribui os dados do pais salvo no state
 
     if (!this.countryData) { // Caso não exista dados do pais
       this.router.navigate(['/'])
     }
 
-    console.log(this.countryData?.borders)
-
-    if(this.countryData?.borders) { // Caso o pais tenha fronteiras
+    if(this.countryData?.borders) {  // Caso o pais tenha fronteiras
       this.searchBorderCountries(this.countryData.borders) // passa as fronteiras como parâmetro
     }
   }
 
   public searchBorderCountries(borders: string[]) {
     // Atribui em um array os dados (observables) de cada fronteira através do serviço
-    const requests = borders.map(code => { 
-      console.log(code)
-      this.countriesService.getCountryByCode(code)
+    const requests = borders.map(code => {
+      return this.countriesService.getCountryByCode(code)
     })
 
-    console.log(requests)
-
     forkJoin(requests).subscribe({ // Inscreve os observables no borderCountries, atribuind apenas os arrays
-      next: (responses: any[]) => {this.borderCountries = responses},
-      error: error => console.error('Erro ao buscar as fronteiras', error)
+      next: (responses: any[]) => {this.borderCountries = responses;}, 
+      error: error => console.error('Erro ao buscar países de fronteira', error)
     });
   }
   
