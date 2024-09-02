@@ -82,13 +82,31 @@ export class HomeComponent implements OnInit {
       this.countriesDataSort = this.allCountriesData
 
     } else {
-      this.countriesDataSort = this.allCountriesData.filter(country => 
-        activeRegions.includes(country.region)
-      )
+      this.countriesDataSort = this.allCountriesData
+        .filter(country => activeRegions.includes(country.region))
     }
     
     this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage)
     this.changePage(1)
+  }
+
+  public handleStatus(status: string): void {
+    this.countriesDataSort = this.filterStatusCountries(this.allCountriesData, status)
+    this.totalPages = Math.ceil(this.countriesDataSort.length / this.itemsPerPage)
+    this.changePage(1)
+  }
+
+  public filterStatusCountries(data: CountryType[], status: string): CountryType[] {
+    switch (status) {
+      case 'Member of the United Nations':
+        return data.sort((a, b) => b.population - a.population)
+
+      case 'Independent':
+        return data.sort((a, b) => b.area - a.area)
+
+      default: 
+        return data
+    }
   }
 
   public changePage(page: number): void {

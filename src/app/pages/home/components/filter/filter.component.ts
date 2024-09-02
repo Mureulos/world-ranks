@@ -49,7 +49,7 @@ export class FilterComponent {
     },
   ]
 
-  @Output() status = new EventEmitter<string>()
+  @Output() status = new EventEmitter()
   statusOptions: FilterType[] = [
     {
       name: 'Independent',
@@ -78,15 +78,9 @@ export class FilterComponent {
     if (item.name === 'All') {
       this.togglesOptions.forEach(toggle => toggle.active = false)
       item.active = true
-    } 
-    
-    else {
+    } else {
       const allToggle = this.togglesOptions.find(toggle => toggle.name === 'All')
-      
-      if (allToggle) {
-        allToggle.active = false
-      }
-      
+      if (allToggle) {allToggle.active = false}
       item.active = !item.active
     }
 
@@ -99,7 +93,18 @@ export class FilterComponent {
   
   public checkStatus(item: any, event: Event) {
     event.preventDefault()
+    
+    if (item.active == false) {
+      this.statusOptions.forEach(e => e.active = false)
+      item.active = true
+    } else {
+      this.statusOptions.forEach(e => e.active = false)
+    }
 
-    item.active = !item.active
+    const activeStatus = this.statusOptions
+      .filter(status => status.active)
+      .map(status => status.name)
+
+    this.status.emit(activeStatus[0])
   }
 }
