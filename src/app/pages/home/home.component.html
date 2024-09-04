@@ -21,9 +21,9 @@
     </div>
   </section>
 
-  <div class="flex flex-1 justify-between sm:hidden mt-4">
-    <button (click)="changePage(currentPage - 1)" class="paginatorButtons">
-      <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon" />
+  <div class="flex flex-1 justify-between items-center sm:hidden mt-4 mobile:hidden">
+    <button (click)="changePage(currentPage - 1)" class="paginatorButtons pr-4">
+      <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon" class="w-8 h-8"/>
       Previous
     </button>
 
@@ -31,9 +31,28 @@
       Page {{ currentPage }} of {{ totalPages }}
     </span>
 
-    <button (click)="changePage(currentPage + 1)" class="paginatorButtons">
+    <button (click)="changePage(currentPage + 1)" class="paginatorButtons pl-4">
       Next
-      <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon" />
+      <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon" class="w-8 h-8"/>
     </button>
+  </div>
+
+  <div class="flex flex-col items-center tablet:hidden">
+    <span class="px-4 py-2 text-sm font-medium">
+      Page {{ currentPage }} of {{ totalPages }}
+    </span>
+    
+    <div class="flex gap-4">
+      <button (click)="changePage(currentPage - 1)" class="paginatorButtons pr-4">
+        <img src="assets/svg/arrow_left.svg" alt="Arrow left svg icon" class="w-8 h-8"/>
+        Previous
+      </button>
+
+      <button (click)="changePage(currentPage + 1)" class="paginatorButtons pl-4">
+        Next
+        <img src="assets/svg/arrow_right.svg" alt="Arrow right svg icon" class="w-8 h-8"/>
+      </button>
+    </div>
+    
   </div>
 </main>

@@ -1,18 +1,14 @@
 <div>
-    <img 
-      src="../assets/img/banner.png" 
-      alt="Banner"
-      class="
-        object-cover
-        w-full
-        h-56
-        z-10
-        tablet:absolute
-        tablet:h-72
-        tablet:top-0
-      "   
-    >
+  <figure class="absolute mt-24 w-full h-8 flex justify-center z-20">
+    <img src="assets/svg/logo.svg" alt="Logo world ranks" class=""/>
+  </figure>
 
-    <router-outlet></router-outlet>
-    <!-- <app-footer></app-footer> -->
+  <img
+    src="../assets/img/banner.jpg"
+    alt="Banner"
+    class="object-cover w-full h-56 z-10 tablet:absolute tablet:h-72 tablet:top-0"
+  />
+
+  <router-outlet></router-outlet>
+  <!-- <app-footer></app-footer> -->
 </div>

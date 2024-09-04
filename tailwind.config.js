@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ts}"],
+  content: ["./src/**/*.{html,ts,css}"],
   theme: {
     screens: {
       mobile: {'max': '500px'},
@@ -39,13 +39,11 @@ module.exports = {
         "md": "20px",
         "lg": "100px",
       },
-
       borderWidth: {
         "05": "0.5px",
         "1": "1px",
         "3": "3px"
       },
-
       minWidth: {
         "800": "800px",
         "850": "850px",
@@ -65,7 +63,7 @@ module.exports = {
         "transparent": "transparent"
       },
       backgroundImage: {
-        //'check': "url('src/assets/svg/check.svg')",
+        // 'check':"url('assets/svg/check.svg')",
       }
     },
   },
