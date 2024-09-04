@@ -35,10 +35,7 @@ Front-end challenge level 3/5 proposed by the DevChallenge platform. The challen
 - Deploy the solution and submit Repository URL and Demo URL.
 
 ## Screenshots:
-
+![App Screenshot](/src/assets/img/done.png)
   
 ### Technologies used:
-
-  
-
 ![Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/64px-Angular_full_color_logo.svg.png)
